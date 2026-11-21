@@ -1,0 +1,52 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Add Android platform
+        run: npx cap add android
+
+      - name: Patch Android project (permissions, service, QR, deep link)
+        run: python3 scripts/patch_android.py
+
+      - name: Generate app icons from www/assets/icon.png
+        continue-on-error: true
+        run: |
+          mkdir -p assets
+          cp www/assets/icon.png assets/icon.png
+          npx @capacitor/assets generate --android --iconBackgroundColor '#17171a' --iconBackgroundColorDark '#17171a'
+
+      - name: Sync web assets and plugins
+        run: npx cap sync android
+
+      - name: Build debug APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: DjApe1-Listener-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
