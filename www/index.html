@@ -1,0 +1,166 @@
+<!doctype html><html lang="el"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="assets/icon.png"><title>Dj Ape1 – Listener</title><script>document.documentElement.dataset.t=localStorage.lt||'dark'</script><style>
+:root{--bg:#17171a;--panel:#26262c;--in:#1c1c21;--line:#44444d;--purple:#9b5cff;--blue:#4cb8ff;--amber:#ffb23d;--tx:#f6f6f8;--mu:#b6b6c2;--wbg:#3a2e1a;--wbd:#7a5a20;--btn:#fff;color-scheme:dark}
+html[data-t=light]{--bg:#f1f1f6;--panel:#ffffff;--in:#f3f3f8;--line:#c9c9d6;--purple:#6a35d9;--blue:#0b63a8;--amber:#9a5a00;--tx:#1a1a22;--mu:#555563;--wbg:#fff3d6;--wbd:#e0b45c;color-scheme:light}
+@media(prefers-color-scheme:light){html[data-t=auto]{--bg:#f1f1f6;--panel:#ffffff;--in:#f3f3f8;--line:#c9c9d6;--purple:#6a35d9;--blue:#0b63a8;--amber:#9a5a00;--tx:#1a1a22;--mu:#555563;--wbg:#fff3d6;--wbd:#e0b45c;color-scheme:light}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,sans-serif;display:grid;place-items:start center;align-content:start;gap:12px;min-height:100vh;padding:12px;padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;width:min(96vw,430px)}
+input,select,button{width:100%;margin:5px 0;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--in);color:var(--tx);font:inherit}
+button{background:var(--purple);border:0;font-weight:700;cursor:pointer;color:var(--btn)}.tabs{display:flex;gap:6px;margin:10px 0}.tabs button{background:var(--in);border:1px solid var(--line);color:var(--tx);margin:0}.tabs .on{background:var(--purple);color:var(--btn)}
+.ic{position:absolute;top:10px;right:10px;width:38px;height:38px;padding:0;margin:0;border-radius:50%;background:#0008;color:#fff;font-size:18px;z-index:2}
+.live{background:var(--amber);color:#000;border-radius:6px;padding:1px 8px;font-size:12px;font-weight:800;margin-left:6px}#st{color:var(--blue);min-height:1.4em;text-align:center;margin-top:6px}
+.np{display:flex;gap:14px;align-items:center;margin:12px 0}.np img{width:104px;height:104px;border-radius:14px;object-fit:cover;background:var(--in);flex:none;border:1px solid var(--line)}.np .t{font-size:1.2em;font-weight:800;line-height:1.25}.np .a{font-size:1.02em}
+.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}.chips span{background:var(--in);border:1px solid var(--line);border-radius:99px;padding:1px 10px;font-size:.82em}.lvb{display:inline-block;background:#d62839;color:#fff;border-radius:6px;padding:1px 9px;font-size:.8em;font-weight:800;margin-bottom:4px}
+.mu{color:var(--mu);font-size:.9em}.row{padding:8px 0;border-bottom:1px solid var(--line)}.sec{margin:10px 0 4px;color:var(--blue);font-weight:700}
+.days{display:flex;gap:4px;flex-wrap:wrap}.days button{width:auto;flex:1;margin:0;padding:7px;background:var(--in);border:1px solid var(--line);color:var(--tx)}.days .on{background:var(--purple);color:var(--btn)}.hide{display:none}
+#srcb{text-align:center;min-height:1.2em;color:var(--amber)}#nt{display:none;background:var(--wbg);border:1px solid var(--wbd);border-radius:10px;padding:8px;margin:6px 0;text-align:center}
+.sec2{background:var(--in)!important;border:1px solid var(--line)!important;color:var(--tx)!important}
+.fav{float:right;width:auto;margin:0;padding:0 8px;background:none;border:0;color:var(--amber);font-size:22px;line-height:1}
+details{margin-top:10px}summary{cursor:pointer;color:var(--blue);font-weight:700}
+.opt{display:flex;gap:10px;align-items:center;margin:8px 0;font-size:.92em}.opt input{width:auto;margin:0}
+.hrow{display:flex;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.hrow:last-child{border:0}.hrow img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex:none;border:1px solid var(--line);background:var(--in)}.hrow .ht{font-weight:800;line-height:1.25}.hm{margin-left:auto;flex:none;white-space:nowrap}
+</style></head><body><div class="card"><button class="ic" id="th" title="Θέμα: σκούρο / ανοιχτό / αυτόματο">◐</button>
+<img src="assets/logo.jpg" alt="Dj Ape1 Private Audio Broadcast" style="width:100%;border-radius:12px">
+<div id="st">Έτοιμο</div>
+<div id="np" class="np hide"><img id="cv" src="assets/icon.png" alt=""><div style="min-width:0"><div id="npl"></div><div class="t" id="np1"></div><div class="a" id="np2"></div><div class="mu" id="np3"></div><div class="chips" id="np4"></div></div></div>
+<div id="srcb"></div><div id="nt"></div><div id="shownow" class="mu" style="text-align:center"></div>
+<div class="tabs"><button id="t1" class="on">LISTEN NOW</button><button id="t2">SCHEDULE</button></div>
+<div id="p1"><input id="srv" class="hide" placeholder="Διεύθυνση σταθμού, π.χ. radio.example.com ή 10.8.0.2:8080" autocomplete="off" inputmode="url"><button id="qr" class="hide sec2">📷 Σάρωση QR του σταθμού</button><input id="code" placeholder="Access Code" autocomplete="off"><input id="name" placeholder="Όνομα (προαιρετικό)">
+<select id="q"><option value="mp3_320">MP3 320</option><option value="mp3_192">MP3 192</option><option value="flac">FLAC</option></select>
+<button id="b">▶ Play</button><input id="v" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"><div id="qa" class="mu" style="text-align:center"></div>
+<select id="slp"><option value="0">Sleep timer: off</option><option value="15">Sleep timer: 15 λεπτά</option><option value="30">Sleep timer: 30 λεπτά</option><option value="60">Sleep timer: 60 λεπτά</option><option value="120">Sleep timer: 2 ώρες</option></select><div id="slst" class="mu" style="text-align:center"></div>
+<details><summary>Ρυθμίσεις</summary>
+<label class="opt"><input type="checkbox" id="set_ds"> Εξοικονόμηση δεδομένων: MP3 192 σε δίκτυο κινητής</label>
+<label class="opt"><input type="checkbox" id="set_ns"> Ειδοποίηση όταν ξεκινά νέα εκπομπή</label>
+<label class="opt"><input type="checkbox" id="set_rem"> Υπενθύμιση 5΄ πριν από τις αγαπημένες εκπομπές ★</label></details><button id="hint" class="sec2" style="margin-top:12px">⌄ Τελευταία 5 τραγούδια</button></div>
+<div id="p2" class="hide"><div class="mu" id="clk"></div><div class="sec">NOW PLAYING SHOW</div><div id="g_now"></div><div class="sec">UP NEXT</div><div id="g_next"></div>
+<div class="days" id="dayb"></div><div id="g_week"></div><div class="mu" style="margin-top:8px">★ = αγαπημένη εκπομπή (υπενθύμιση πριν την έναρξη)</div></div><audio id="a"></audio></div>
+<div class="card" id="hc"><div class="sec" style="margin-top:0">ΤΕΛΕΥΤΑΙΑ 5 ΤΡΑΓΟΥΔΙΑ</div><div id="hl" class="mu"></div></div>
+<script>
+const $=i=>document.getElementById(i),a=$('a'),DN=['Κυρ','Δευ','Τρί','Τετ','Πέμ','Παρ','Σάβ'];
+let es,retry=0,want=false,G=null,selDay=null,prevShow,sleepT=null,sleepEnd=0,sleepT2,svcOn=false,netType='unknown',netOn=true;
+const CAP=window.Capacitor,P=(CAP&&CAP.Plugins)||{},IS_APP=!!(CAP&&CAP.isNativePlatform&&CAP.isNativePlatform());
+let BASE=IS_APP?(localStorage.base||''):'';
+const REM_MIN=5;
+const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LS=(k,d)=>{const v=localStorage.getItem(k);return v==null?d:v};
+const call=(pl,m,arg)=>{try{const r=P[pl]&&P[pl][m]?P[pl][m](arg):null;if(r&&r.catch)r.catch(()=>{});return r}catch(e){return null}};
+function status(t){$('st').textContent=t}
+/* ---- διεύθυνση σταθμού (μόνο στην εφαρμογή) ---- */
+if(IS_APP){$('srv').classList.remove('hide');$('srv').value=BASE;if(P.BarcodeScanner)$('qr').classList.remove('hide')}
+function setBase(){if(!IS_APP)return true;let s=$('srv').value.trim();if(!s){status('Γράψε τη διεύθυνση του σταθμού');return false}if(!/^https?:\/\//.test(s))s='http://'+s;BASE=s.replace(/\/$/,'');localStorage.base=BASE;return true}
+/* ---- αποθηκευμένα στοιχεία & ρυθμίσεις ---- */
+{const qc=new URLSearchParams(location.search).get('code');$('code').value=qc||localStorage.lcode||'';$('name').value=localStorage.lname||'';if(localStorage.lq)$('q').value=localStorage.lq}
+$('set_ds').checked=LS('lds','1')==='1';$('set_ns').checked=LS('lns','1')==='1';$('set_rem').checked=LS('lrem','1')==='1';
+$('set_ds').onchange=e=>localStorage.lds=e.target.checked?'1':'0';
+$('set_ns').onchange=e=>localStorage.lns=e.target.checked?'1':'0';
+$('set_rem').onchange=e=>{localStorage.lrem=e.target.checked?'1':'0';syncReminders()};
+/* theme */
+$('th').onclick=()=>{const n={dark:'light',light:'auto',auto:'dark'}[document.documentElement.dataset.t]||'dark';localStorage.lt=n;document.documentElement.dataset.t=n;status({dark:'Θέμα: σκούρο',light:'Θέμα: ανοιχτό',auto:'Θέμα: αυτόματο (όπως η συσκευή)'}[n])};
+function notice(t){const e=$('nt');e.textContent=t;e.style.display='block';clearTimeout(notice.t);notice.t=setTimeout(()=>e.style.display='none',9000)}
+function localNote(title,body){call('LocalNotifications','schedule',{notifications:[{id:1,title,body,schedule:{at:new Date(Date.now()+400)}}]})}
+/* ---- ποιότητα (εξοικονόμηση δεδομένων) ---- */
+function qualityNow(){const c=navigator.connection,cell=netType==='cellular'||(c&&c.type==='cellular');return($('set_ds').checked&&cell)?'mp3_192':$('q').value}
+const qLabel=q=>({mp3_320:'MP3 320',mp3_192:'MP3 192',flac:'FLAC'}[q]||q);
+/* ---- υπηρεσία παρασκηνίου (foreground service) ---- */
+async function startSvc(){if(!IS_APP||svcOn||!P.Radio)return;svcOn=true;
+ if(P.LocalNotifications&&!localStorage.lnp){localStorage.lnp='1';try{await P.LocalNotifications.requestPermissions()}catch(e){}}
+ if(!want){svcOn=false;return}call('Radio','start',{title:'Dj Ape1',text:'Ζωντανή μετάδοση'})}
+function stopSvc(){if(svcOn){svcOn=false;call('Radio','stop',{})}}
+if(P.Radio&&P.Radio.addListener){try{P.Radio.addListener('stop',()=>{svcOn=false;if(want)stopUI('Stopped')})}catch(e){}}
+/* ---- σύνδεση ---- */
+let curQ='mp3_320';
+function go(){if(!setBase())return;want=true;localStorage.lcode=$('code').value;localStorage.lname=$('name').value;localStorage.lq=$('q').value;
+ curQ=qualityNow();const p=new URLSearchParams({code:$('code').value,name:$('name').value,q:curQ});
+ status(retry?'Reconnecting…':'Connecting…');a.src=BASE+'/stream?'+p+'&t='+Date.now();a.play().catch(()=>{});startSvc();
+ if(es)es.close();es=new EventSource(BASE+'/events?code='+encodeURIComponent($('code').value));
+ es.onmessage=e=>{const m=JSON.parse(e.data);nowPlaying(m);
+  const SM={silence:'🔇 Ο σταθμός δεν στέλνει ήχο αυτή τη στιγμή (δεν φταίει η σύνδεσή σου).',paused:'⏸ Η μουσική είναι σε παύση στον σταθμό.'};$('srcb').textContent=SM[m.source]||'';
+  $('shownow').textContent=m.show?'Εκπομπή: '+m.show:'';
+  if(prevShow!==undefined&&m.show&&m.show!==prevShow){notice('▶ Ξεκίνησε η εκπομπή: '+m.show);if(IS_APP&&document.hidden&&$('set_ns').checked)localNote('Dj Ape1','▶ Ξεκίνησε η εκπομπή: '+m.show)}
+  prevShow=m.show;if(m.show)guide()};
+ guide()}
+function mediaSession(m,live){if(!('mediaSession' in navigator))return;try{navigator.mediaSession.metadata=new MediaMetadata({title:m.title||'Dj Ape1',artist:live?'LIVE':(m.artist||''),album:m.album||'Dj Ape1 Radio',artwork:[{src:$('cv').src,sizes:'512x512'}]});navigator.mediaSession.setActionHandler('play',()=>{if(!want)$('b').click()});navigator.mediaSession.setActionHandler('pause',()=>{if(want)$('b').click()});navigator.mediaSession.setActionHandler('stop',()=>{if(want)$('b').click()})}catch(e){}}
+function nowPlaying(m){const has=m.title||m.artist,live=m.mode==='live';$('np').classList.toggle('hide',!has);if(!has)return;
+ $('npl').innerHTML=live?'<span class="lvb">● LIVE</span>':'';$('np1').textContent=m.title||'';$('np2').textContent=live?'':(m.artist||'');
+ $('np3').textContent=[m.album,m.year].filter(Boolean).join(' · ');
+ $('np4').innerHTML=String(m.genre||'').split(/[;,\/]/).map(s=>s.trim()).filter(Boolean).slice(0,4).map(g=>'<span>'+esc(g)+'</span>').join('');
+ const cv=$('cv');if(m.coverId&&!live){const u=BASE+'/cover?code='+encodeURIComponent($('code').value)+'&id='+encodeURIComponent(m.coverId);if(cv.dataset.u!==u){cv.dataset.u=u;cv.src=u}}else{cv.dataset.u='';cv.src='assets/icon.png'}
+ cv.onerror=()=>{cv.onerror=null;cv.src='assets/icon.png'};mediaSession(m,live);pushHist(m,live);
+ if(svcOn)call('Radio','update',{title:m.title||'Dj Ape1',text:live?'● LIVE':(m.artist||'')})}
+a.onplaying=()=>{retry=0;status('Connected – Stable');$('qa').textContent='Ποιότητα: '+qLabel(curQ)+(curQ!==$('q').value?' (εξοικονόμηση δεδομένων)':'');if('mediaSession' in navigator)navigator.mediaSession.playbackState='playing'};a.onwaiting=()=>status('Buffering…');
+async function why(){try{const c=new AbortController(),r=await fetch(a.src,{signal:c.signal});if(r.ok){c.abort();return null}return{st:r.status,msg:(await r.json().catch(()=>({}))).error||('HTTP '+r.status)}}catch(e){return null}}
+function stopUI(m){want=false;a.pause();a.removeAttribute('src');a.load();if(es)es.close();stopSvc();$('b').textContent='▶ Play';status(m)}
+a.onerror=a.onended=async()=>{if(!want)return;const w=await why();if(!want)return;
+ if(w&&w.st===403)return stopUI('⛔ '+w.msg+' – έλεγξε τον κωδικό');
+ if(w&&w.st===429)return stopUI('⏳ Πολλές αποτυχημένες προσπάθειες – περίμενε 1 λεπτό και δοκίμασε ξανά');
+ if(w&&w.st===503)status('⛔ '+w.msg);else{retry++;status(retry>3?'Host Offline – νέα προσπάθεια…':'Reconnecting…')}
+ setTimeout(()=>want&&go(),Math.min(1000*(retry+1),8000))};
+$('b').onclick=()=>{if(want){stopUI('Stopped')}else{go();if(want)$('b').textContent='⏸ Stop'}};
+$('v').oninput=e=>a.volume=e.target.value;
+/* ---- αυτόματη επανασύνδεση όταν αλλάζει / επανέρχεται το δίκτυο ---- */
+async function initNet(){const N=P.Network;if(!N)return;try{const s=await N.getStatus();netType=s.connectionType;netOn=s.connected}catch(e){}
+ try{N.addListener('networkStatusChange',s=>{const was=netOn,t=netType;netType=s.connectionType;netOn=s.connected;if(want&&s.connected&&(!was||t!==netType)){retry=0;status('Αλλαγή δικτύου – επανασύνδεση…');go()}})}catch(e){}}
+initNet();
+window.addEventListener('online',()=>{if(want&&!P.Network){retry=0;go()}});
+/* ---- sleep timer ---- */
+$('slp').onchange=()=>{clearTimeout(sleepT);clearInterval(sleepT2);$('slst').textContent='';const m=+$('slp').value;if(!m)return;sleepEnd=Date.now()+m*60000;
+ sleepT=setTimeout(()=>{if(want)stopUI('😴 Sleep timer: σταμάτησε');$('slp').value='0';$('slst').textContent='';clearInterval(sleepT2)},m*60000);
+ sleepT2=setInterval(()=>{$('slst').textContent='Σταματά σε '+Math.max(0,Math.ceil((sleepEnd-Date.now())/60000))+' λ.'},5000);$('slst').textContent='Σταματά σε '+m+' λ.'};
+/* ---- τελευταία 5 τραγούδια (από όσα έχουν παίξει όσο είσαι συνδεδεμένος) ---- */
+let HIST=[];try{HIST=JSON.parse(localStorage.lhist||'[]')}catch(e){}
+function pushHist(m,live){const key=live?'LIVE|'+(m.title||''):(m.title||'')+'|'+(m.artist||'');if(HIST[0]&&HIST[0].k===key)return;
+ HIST.unshift({k:key,t:Date.now(),title:m.title||'',artist:live?'':(m.artist||''),album:m.album||'',year:m.year||'',cover:live?'':(m.coverId||''),live});HIST=HIST.slice(0,5);
+ try{localStorage.lhist=JSON.stringify(HIST)}catch(e){}renderHist()}
+function renderHist(){const el=$('hl');if(!HIST.length){el.textContent='Δεν υπάρχουν ακόμα. Θα εμφανίζονται καθώς ακούς.';return}
+ el.innerHTML=HIST.map((h,i)=>{const u=h.cover?BASE+'/cover?code='+encodeURIComponent($('code').value)+'&id='+encodeURIComponent(h.cover):'assets/icon.png';
+  return `<div class="hrow"><img src="${esc(u)}" alt="" onerror="this.onerror=null;this.src='assets/icon.png'"><div style="min-width:0"><div class="ht">${h.live?'<span class="lvb">● LIVE</span> ':''}${esc(h.title)}</div><div>${esc(h.artist)}</div><div class="mu">${esc([h.album,h.year].filter(Boolean).join(' · '))}</div></div><div class="mu hm">${i===0&&want?'<b style="color:var(--amber)">ΤΩΡΑ</b>':new Date(h.t).toLocaleTimeString('el-GR',{hour:'2-digit',minute:'2-digit'})}</div></div>`}).join('')}
+$('hint').onclick=()=>$('hc').scrollIntoView({behavior:'smooth'});renderHist();
+/* ---- tabs ---- */
+function tab(n){$('p1').classList.toggle('hide',n!==1);$('p2').classList.toggle('hide',n!==2);$('t1').classList.toggle('on',n===1);$('t2').classList.toggle('on',n===2);if(n===2)guide()}
+$('t1').onclick=()=>tab(1);$('t2').onclick=()=>tab(2);
+/* ---- αγαπημένες εκπομπές ---- */
+let FAV=[];try{FAV=JSON.parse(localStorage.lfav||'[]')}catch(e){}
+const sid=s=>String(s.id||s.name),isFav=s=>FAV.includes(sid(s));
+const show=(s,live)=>`<div class="row"><button class="fav" data-f="${esc(sid(s))}" aria-label="Αγαπημένο">${isFav(s)?'★':'☆'}</button><b>${esc(s.name)}</b>${live?'<span class="live">LIVE</span>':''}<div class="mu">${esc(s.start)}–${esc(s.end)}${s.genre?' · '+esc(s.genre):''}${s.dj?' · DJ '+esc(s.dj):''}</div>${s.desc?'<div class="mu">'+esc(s.desc)+'</div>':''}</div>`;
+$('p2').addEventListener('click',e=>{const b=e.target.closest('.fav');if(!b)return;const f=b.dataset.f;FAV=FAV.includes(f)?FAV.filter(x=>x!==f):[...FAV,f];localStorage.lfav=JSON.stringify(FAV);render();syncReminders()});
+const hash=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return Math.abs(h)%2000000000+10};
+async function syncReminders(){const LN=P.LocalNotifications;if(!IS_APP||!LN||!G)return;
+ const on=$('set_rem').checked,favs=(G.week||[]).filter(isFav),sig=JSON.stringify([on,favs.map(s=>[sid(s),s.start,s.days])]);
+ if(sig===localStorage.lremsig)return;
+ try{const old=JSON.parse(localStorage.lremids||'[]');if(old.length)await LN.cancel({notifications:old.map(id=>({id}))});
+  localStorage.lremids='[]';const list=[],ids=[];
+  if(on&&favs.length){
+   if(Intl.DateTimeFormat().resolvedOptions().timeZone!==G.tz){notice('Οι υπενθυμίσεις θέλουν ίδια ζώνη ώρας με τον σταθμό ('+G.tz+')');localStorage.lremsig=sig;return}
+   const pm=await LN.requestPermissions();if(pm.display!=='granted'){notice('Δώσε άδεια ειδοποιήσεων για τις υπενθυμίσεις');return}
+   favs.forEach(s=>{const days=s.days&&s.days.length?s.days:[0,1,2,3,4,5,6],[h,m]=s.start.split(':').map(Number);
+    days.forEach(d=>{let t=h*60+m-REM_MIN,dd=d;if(t<0){t+=1440;dd=(d+6)%7}const id=hash(sid(s)+'|'+d);ids.push(id);
+     list.push({id,title:'Dj Ape1',body:'Σε '+REM_MIN+' λεπτά: '+s.name,schedule:{on:{weekday:dd+1,hour:Math.floor(t/60),minute:t%60},allowWhileIdle:true}})})});
+   if(list.length)await LN.schedule({notifications:list});
+   localStorage.lremids=JSON.stringify(ids);notice('✓ Υπενθυμίσεις: '+favs.length+' εκπομπ'+(favs.length>1?'ές':'ή'))}
+  localStorage.lremsig=sig}catch(e){}}
+/* ---- πρόγραμμα ---- */
+async function guide(){const c=$('code').value;if(IS_APP&&!BASE){if(!setBase()){$('g_now').innerHTML='<div class="mu">Γράψε τη διεύθυνση του σταθμού στην πρώτη καρτέλα.</div>';return}}
+ if(!c){$('g_now').innerHTML='<div class="mu">Γράψε τον Access Code στην πρώτη καρτέλα.</div>';return}
+ try{const r=await fetch(BASE+'/guide?code='+encodeURIComponent(c));if(!r.ok)throw 0;G=await r.json();render();syncReminders()}catch(e){$('g_now').innerHTML='<div class="mu">Δεν ήταν δυνατή η φόρτωση προγράμματος.</div>'}}
+function render(){if(!G)return;const n=G.now;if(selDay===null)selDay=n.day;
+ $('clk').textContent=`Ώρα σταθμού (${G.tz}): ${String(Math.floor(n.min/60)).padStart(2,'0')}:${String(n.min%60).padStart(2,'0')} · ${DN[n.day]}`;
+ $('g_now').innerHTML=G.nowShow?show(G.nowShow,true):'<div class="mu">Καμία προγραμματισμένη εκπομπή αυτή τη στιγμή.</div>';
+ if(G.next){const m=G.next.inMinutes;$('g_next').innerHTML=show(G.next.show)+`<div class="mu">σε ${m>=60?Math.floor(m/60)+' ώρ. ':''}${m%60} λ.</div>`}else $('g_next').innerHTML='<div class="mu">—</div>';
+ $('dayb').innerHTML=[1,2,3,4,5,6,0].map(d=>`<button data-d="${d}" class="${d===selDay?'on':''}">${DN[d]}</button>`).join('');
+ $('dayb').querySelectorAll('button').forEach(b=>b.onclick=()=>{selDay=+b.dataset.d;render()});
+ const L=G.week.filter(s=>(s.days&&s.days.includes(selDay))||(!s.days||!s.days.length)).sort((x,y)=>x.start.localeCompare(y.start));
+ $('g_week').innerHTML=L.map(s=>show(s,G.nowShow&&G.nowShow.id===s.id&&selDay===n.day)).join('')||'<div class="mu">Καμία εκπομπή.</div>'}
+setInterval(()=>{if(G&&!$('p2').classList.contains('hide'))guide()},30000);
+/* ---- σύνδεσμοι / QR:  http(s)://σταθμός/?code=XXXX   ή   djape1://listen?server=σταθμός&code=XXXX ---- */
+function applyLink(u){try{const url=new URL(u);let server='';
+  if(/^djape1:$/i.test(url.protocol))server=url.searchParams.get('server')||'';else if(/^https?:$/i.test(url.protocol))server=url.origin;
+  const code=url.searchParams.get('code')||'';if(!server&&!code){status('Μη έγκυρος σύνδεσμος');return}
+  if(server&&IS_APP){$('srv').value=server;setBase()}if(code){$('code').value=code;localStorage.lcode=code}
+  tab(1);notice('✓ Τα στοιχεία του σταθμού συμπληρώθηκαν – πάτα Play');guide()}catch(e){status('Μη έγκυρο QR / σύνδεσμος')}}
+$('qr').onclick=async()=>{const B=P.BarcodeScanner;if(!B){status('Η σάρωση QR δεν είναι διαθέσιμη');return}
+ try{try{const r=await B.isGoogleBarcodeScannerModuleAvailable();if(r&&r.available===false){status('Εγκατάσταση σαρωτή από τις Υπηρεσίες Google…');await B.installGoogleBarcodeScannerModule();notice('Ο σαρωτής εγκαθίσταται. Δοκίμασε ξανά σε λίγα δευτερόλεπτα.');return}}catch(e){}
+  const r=await B.scan({formats:['QR_CODE']}),v=r.barcodes&&r.barcodes[0]&&(r.barcodes[0].rawValue||r.barcodes[0].displayValue);if(v)applyLink(v);else status('Δεν βρέθηκε QR')}catch(e){status('Η σάρωση ακυρώθηκε')}};
+if(IS_APP&&P.App){try{P.App.addListener('appUrlOpen',e=>applyLink(e.url));P.App.addListener('backButton',()=>{call('App','minimizeApp')});
+  const l=P.App.getLaunchUrl();if(l&&l.then)l.then(r=>{if(r&&r.url)applyLink(r.url)}).catch(()=>{})}catch(e){}}
+</script></body></html>

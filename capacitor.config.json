@@ -1,0 +1,13 @@
+{
+  "appId": "gr.djape1.listener",
+  "appName": "Dj Ape1",
+  "webDir": "www",
+  "backgroundColor": "#17171a",
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
